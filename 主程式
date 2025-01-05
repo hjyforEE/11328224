@@ -1,0 +1,26 @@
+def calculate_final_score():
+
+    scores_input = input("請輸入期末考前的成績及加權 (以空格隔開每份成績，成績和加權間用分號分隔): ")
+    final_weight = float(input("請輸入期末考的加權: "))
+
+    score_weight_pairs = scores_input.split(";")
+    scores = []
+    weights = []
+
+    for pair in score_weight_pairs:
+        score, weight = pair.split()
+        scores.append(float(score))
+        weights.append(float(weight))
+
+    total_weight = sum(weights)
+    weighted_sum = sum([score * weight for score, weight in zip(scores, weights)])
+
+    required_final_score = (60 - (weighted_sum / total_weight)) / final_weight * 100
+
+
+    if required_final_score <= 100:
+        print(f"要及格，期末得拿: {required_final_score:.2f}分")
+    else:
+        print("完啦")
+
+calculate_final_score()
